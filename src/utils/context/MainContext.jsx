@@ -2,6 +2,7 @@ import React, { createContext, useReducer } from 'react'
 import AppReducer, { initAppState } from './reducers/AppReducer';
 import AuthReducer, { initAuthState } from './reducers/AuthReducer';
 import ListReducer, { initListState } from './reducers/ListReducer';
+import ObjectReducer, { initObjectState } from './reducers/ObjectReducer';
 
 export const StateContext = createContext();
 export const DispatchContext = createContext();
@@ -10,6 +11,7 @@ export default function MainContext(props) {
     const [auth, authDispatch] = useReducer(AuthReducer, initAuthState);//for student auth
     const [app, appDispatch] = useReducer(AppReducer, initAppState);//for app state
     const [list, listDispatch] = useReducer(ListReducer, initListState);//for any kind of list
+    const [obj, objDispatch] = useReducer(ObjectReducer, initObjectState);//for any kind of object
 
 
     const global_state = {

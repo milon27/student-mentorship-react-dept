@@ -3,7 +3,7 @@ import Response from "../../helpers/Response";
 import Define from "./../../helpers/Define";
 import Types from "./Types";
 
-class ListAction {
+class ObjectAction {
     constructor(dispatch) {
         this.dispatch = dispatch;
     }
@@ -12,8 +12,8 @@ class ListAction {
         return this.source;
     }; //return token to cancel the request
 
-    //get all data
-    getAll = async (url) => {
+    //get the object 
+    getData = (url) => {
         return new Promise((resolve, reject) => {
             axios
                 .get(`${url}`, {
@@ -26,7 +26,7 @@ class ListAction {
                         //dispatch the global state
                         this.dispatch({
                             type: Types.GET_DATA,
-                            payload: response, //an array
+                            payload: response, //an object
                         });
                         resolve(
                             Response(true, "success", message, Define.BT_SUCCESS, response)
@@ -43,7 +43,8 @@ class ListAction {
                     }
                 });
         });
-    }; //end get all(make sure you got a response (object type) )
+    }//get end 
+
     addData = (url, newdata) => {
         return new Promise((resolve, reject) => {
             axios
@@ -71,8 +72,8 @@ class ListAction {
                 });
         });
     }; //end add data
-    //id_field=primary key (based on which field item will be identified)
-    updateData = (url, updateData, id_field) => {
+
+    updateData = (url, updateData) => {
         return new Promise((resolve, reject) => {
             axios.put(url, updateData).then((res) => {
                 const { error, message, response } = res.data
@@ -80,10 +81,7 @@ class ListAction {
                     //dispatch the global state
                     this.dispatch({
                         type: Types.UPDATE_DATA,
-                        payload: {
-                            id_field: id_field,
-                            obj: response
-                        }
+                        payload: response
                     });
                     resolve(Response(true, "update succes", message, Define.BT_SUCCESS, response));
                 } else {
@@ -95,6 +93,28 @@ class ListAction {
             })
         });
     }//end update data
-}
 
-export default ListAction;
+    deleteData = (url) => {
+        return new Promise((resolve, reject) => {
+            axios.delete(url).then((res) => {
+                const { error, message, response } = res.data
+                if (error === false) {
+                    //dispatch the global state
+                    this.dispatch({
+                        type: Types.DELETE_DATA
+                    });
+                    resolve(Response(true, "delete succes", message, Define.BT_SUCCESS, {}));
+                } else {
+                    reject(new Error(message));
+                }
+            }).catch((e) => {
+                console.error("erroe: ", e)
+                reject(e);
+            })
+        });
+    }//end update data
+
+
+
+}
+export default ObjectAction
