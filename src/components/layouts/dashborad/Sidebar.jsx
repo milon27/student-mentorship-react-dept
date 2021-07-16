@@ -39,6 +39,14 @@ export default function Sidebar() {
                 <hr className="sidebar-divider d-none d-md-block" />
 
                 <li className="nav-item ">
+                    <NavLink exact activeClassName="active" className="nav-link" to={URL.HOME}>
+                        <i className="fas fa-fw fa-award"></i>
+                        <span>Skill Management</span>
+                    </NavLink>
+                </li>
+                <hr className="sidebar-divider d-none d-md-block" />
+
+                <li className="nav-item ">
                     <NavLink exact activeClassName="active" className="nav-link" to={URL.CONTRIBUTOR}>
                         <i className="fas fa-fw fa-award"></i>
                         <span>Contributor List</span>

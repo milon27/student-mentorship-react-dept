@@ -28,6 +28,20 @@ const ListReducer = (state, action) => {
                     return itm;
             });
             return state;//return array with updated object
+        case Types.DELETE_DATA:
+            /**
+                 * this.dispatch({
+                 *      type:Types.DELETE_DATA
+                 *      payload:{
+                 *          id_field:"id",
+                 *          id:2
+                 *      }
+                 * })
+                 */
+
+            return state.filter((Deletedata) => {
+                return Deletedata[action.payload.id_field] === action.payload.id
+            });
         default:
             return state;//default arry
     }
