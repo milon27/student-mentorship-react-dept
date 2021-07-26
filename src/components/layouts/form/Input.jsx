@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form } from 'react-bootstrap';
 
-export default function Input({ title, value, name, onChange, disable = false, type = "text" }) {
+export default function Input({ title, value, name, onChange, disable = false, type }) {
     return (
         <>
             <Form.Group>

@@ -39,7 +39,7 @@ export default function Sidebar() {
                 <hr className="sidebar-divider d-none d-md-block" />
 
                 <li className="nav-item ">
-                    <NavLink exact activeClassName="active" className="nav-link" to={URL.HOME}>
+                    <NavLink exact activeClassName="active" className="nav-link" to={URL.SKILL_MANAGEMENT}>
                         <i className="fas fa-fw fa-award"></i>
                         <span>Skill Management</span>
                     </NavLink>

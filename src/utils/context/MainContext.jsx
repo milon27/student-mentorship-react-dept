@@ -12,13 +12,15 @@ export default function MainContext(props) {
     const [app, appDispatch] = useReducer(AppReducer, initAppState);//for app state
     const [list, listDispatch] = useReducer(ListReducer, initListState);//for any kind of list
     const [obj, objDispatch] = useReducer(ObjectReducer, initObjectState);//for any kind of object
-
+    const [skill_list, skill_listDispatch] = useReducer(ListReducer, initListState);
+    const [subSkill_list, subSkill_listDispatch] = useReducer(ListReducer, initListState);
+    const [question_list, question_listDispatch] = useReducer(ListReducer, initListState);
 
     const global_state = {
-        auth, list, app
+        auth, list, app,skill_list,subSkill_list,question_list
     }
     const global_dispatch = {
-        authDispatch, listDispatch, appDispatch
+        authDispatch, listDispatch, appDispatch,skill_listDispatch,subSkill_listDispatch,question_listDispatch
     }
 
     return (

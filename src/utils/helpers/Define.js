@@ -1,5 +1,5 @@
 const Define = {
-    API_BASE_URL: "http://localhost:2727/",//
+    API_BASE_URL: "http://localhost:2727/", //
     //time format
     FORMAT_DATE: "DD-MM-YYYY, hh:mm A",
     //bootstrap color
@@ -11,5 +11,6 @@ const Define = {
     //define
     NOT_SET: "NOT_SET",
     C_USER: "DEPT_C_USER",
+    PAGE_SIZE: 10
 }
 export default Define
