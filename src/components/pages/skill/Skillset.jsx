@@ -45,7 +45,7 @@ export default function Skillset() {
                     <Button className="mr-2 button_color" onClick={next}>Next</Button>
                 </Col>
                 <Col className="d-flex justify-content-end mb-3 ">
-                    <Button className="button_color"onClick={() => { setShow(true) }}>Add New Skill</Button>
+                    <Button className="button_color" onClick={() => { setShow(true) }}>Add New Skill</Button>
                 </Col>
             </Row>
             <Row>

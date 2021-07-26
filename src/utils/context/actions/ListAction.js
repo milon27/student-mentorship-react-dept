@@ -13,7 +13,7 @@ class ListAction {
     }; //return token to cancel the request
 
     //get all data
-    getAll = async(url) => {
+    getAll = async (url) => {
         return new Promise((resolve, reject) => {
             axios
                 .get(`${url}`, {
@@ -73,29 +73,30 @@ class ListAction {
     }; //end add data
     //id_field=primary key (based on which field item will be identified)
     updateData = (url, updateData, id_field) => {
-            return new Promise((resolve, reject) => {
-                axios.put(url, updateData).then((res) => {
-                    const { error, message, response } = res.data
-                    if (error === false) {
-                        //dispatch the global state
-                        this.dispatch({
-                            type: Types.UPDATE_DATA,
-                            payload: {
-                                id_field: id_field,
-                                obj: response
-                            }
-                        });
-                        resolve(Response(true, "update succes", message, Define.BT_SUCCESS, response));
-                    } else {
-                        reject(new Error(message));
-                    }
-                }).catch((e) => {
-                    console.error("erroe: ", e)
-                    reject(e);
-                })
-            });
-        } //end update data
-        // Delete Data
+        return new Promise((resolve, reject) => {
+            axios.put(url, updateData).then((res) => {
+                const { error, message, response } = res.data
+                // console.log("after update: ", res.data);
+                if (error === false) {
+                    //dispatch the global state
+                    this.dispatch({
+                        type: Types.UPDATE_DATA,
+                        payload: {
+                            id_field: id_field,
+                            obj: updateData
+                        }
+                    });
+                    resolve(Response(true, "update succes", message, Define.BT_SUCCESS, response));
+                } else {
+                    reject(new Error(message));
+                }
+            }).catch((e) => {
+                console.error("erroe: ", e)
+                reject(e);
+            })
+        });
+    } //end update data
+    // Delete Data
     deleteData = (url, deleteData, id_field) => {
         return new Promise((resolve, reject) => {
             axios

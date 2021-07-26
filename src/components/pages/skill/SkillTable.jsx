@@ -28,15 +28,15 @@ export default function SkillTable({ page }) {
   };
 
   // Handle View 
-  const handleViewSubSkill=(item) => {
-    history.push('/subSkill',{sub_items:item})
+  const handleViewSubSkill = (item) => {
+    history.push('/subSkill', { sub_items: item })
   };
 
   const { appDispatch, skill_listDispatch } = useContext(DispatchContext);
 
   const onSubmit = async () => {
     //hide the modal
-    setShow({view: false, edit: false, delete: false });
+    setShow({ view: false, edit: false, delete: false });
     //validation
     const appAction = new AppAction(appDispatch);
     if (!Helper.validateField(viewItem.title, viewItem.intro_url)) {
@@ -54,7 +54,7 @@ export default function SkillTable({ page }) {
   //global state
   const { skill_list } = useContext(StateContext);
 
-  // Getting Notice_list
+  // Getting list
   useEffect(() => {
 
     const listAction = new ListAction(skill_listDispatch)
@@ -118,10 +118,10 @@ export default function SkillTable({ page }) {
                     <td>{item.title}</td>
                     <td><a href={item.intro_url} target="blank">{item.intro_url}</a></td>
                     <td>
-                       <button
+                      <button
                         className="btn text-info bg-transparent"
-                        onClick={() =>handleViewSubSkill(item)}
-                        >
+                        onClick={() => handleViewSubSkill(item)}
+                      >
                         View
                       </button>
                       <button

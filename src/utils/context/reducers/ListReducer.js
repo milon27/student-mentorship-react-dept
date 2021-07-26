@@ -18,18 +18,18 @@ const ListReducer = (state, action) => {
              *      }
              * })
              */
+            console.log(action.payload.id_field, action.payload.obj);
+            return state.map(itm => {
+                const id_field = action.payload.id_field
+                if (itm[id_field] === action.payload.obj[id_field])
+                    return action.payload.obj;
+                else
+                    return itm;
+            });//return array with updated object
 
-            // state = state.map(itm => {
-            //     const id_field = action.payload.id_field
-            //     if (itm[id_field] === action.payload.obj[id_field])
-            //         return action.payload.obj;
-            //     else
-            //         return itm;
-            // });
-            //   return state;//return array with updated object
-            return state.filter((updateData) => {
-                return updateData[action.payload.id_field] === action.payload.id
-            });
+        // return state.filter((updateData) => {
+        //     return updateData[action.payload.id_field] === action.payload.id
+        // });
         case Types.DELETE_DATA:
             /**
              * this.dispatch({
