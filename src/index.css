@@ -37,7 +37,9 @@
     color: #FFF!important;
     font-weight: bold;
 }
-
+.icon_width{
+    width: 30px;
+  }
 
 /* ---------------------------------------------------------------------------- */
 /* mobile only  */
