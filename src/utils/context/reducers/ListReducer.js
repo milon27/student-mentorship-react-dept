@@ -1,13 +1,12 @@
-
 import Types from '../actions/Types';
 export const initListState = [];
 
 const ListReducer = (state, action) => {
     switch (action.type) {
         case Types.GET_DATA:
-            return [...action.payload];//return an array
+            return [...action.payload]; //return an array
         case Types.ADD_DATA:
-            return [action.payload, ...state];//return array with new object
+            return [action.payload, ...state]; //return array with new object
         case Types.UPDATE_DATA:
             //use case
             /**
@@ -20,30 +19,33 @@ const ListReducer = (state, action) => {
              * })
              */
 
-            state = state.map(itm => {
-                const id_field = action.payload.id_field
-                if (itm[id_field] === action.payload.obj[id_field])
-                    return action.payload.obj;
-                else
-                    return itm;
+            // state = state.map(itm => {
+            //     const id_field = action.payload.id_field
+            //     if (itm[id_field] === action.payload.obj[id_field])
+            //         return action.payload.obj;
+            //     else
+            //         return itm;
+            // });
+            //   return state;//return array with updated object
+            return state.filter((updateData) => {
+                return updateData[action.payload.id_field] === action.payload.id
             });
-            return state;//return array with updated object
         case Types.DELETE_DATA:
             /**
-                 * this.dispatch({
-                 *      type:Types.DELETE_DATA
-                 *      payload:{
-                 *          id_field:"id",
-                 *          id:2
-                 *      }
-                 * })
-                 */
+             * this.dispatch({
+             *      type:Types.DELETE_DATA
+             *      payload:{
+             *          id_field:"id",
+             *          id:2
+             *      }
+             * })
+             */
 
             return state.filter((Deletedata) => {
                 return Deletedata[action.payload.id_field] === action.payload.id
             });
         default:
-            return state;//default arry
+            return state; //default arry
     }
 
 }
