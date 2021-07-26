@@ -6,7 +6,7 @@ import AlertLoading from '../../layouts/AlertLoading';
 import SubSkillSetModal from './SubSkillSetModal';
 import SubSkillTable from './SubSkillTable';
 
-export default function SubSkillset({sub_item}) {
+export default function SubSkillset() {
     //local state
     const [show, setShow] = useState(false);
     const [page, setPage] = useState(1);
@@ -32,7 +32,7 @@ export default function SubSkillset({sub_item}) {
 
     return (
         <>
-            <SubSkillSetModal show={show} setShow={setShow} sub_item={sub_item} />
+            <SubSkillSetModal show={show} setShow={setShow} />
             <Row >
                 <Col className="d-flex justify-content-center mb-3">
                     <AlertLoading loadColor={Define.BT_DANGER} />
@@ -45,12 +45,12 @@ export default function SubSkillset({sub_item}) {
                     <Button className="mr-2 button_color" onClick={next}>Next</Button>
                 </Col>
                 <Col className="d-flex justify-content-end mb-3 ">
-                    <Button className="button_color"onClick={() => { setShow(true) }}>Add New Sub Skill</Button>
+                    <Button className="button_color" onClick={() => { setShow(true) }}>Add New Sub Skill</Button>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <SubSkillTable page={page} sub_item={sub_item} />
+                    <SubSkillTable page={page} />
                 </Col>
             </Row>
         </ >

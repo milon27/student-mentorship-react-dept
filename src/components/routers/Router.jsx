@@ -20,9 +20,14 @@ export default function Router() {
                 <Route path={URL.SIGN_IN} component={SignIn}></Route>
 
                 <Route path={URL.CONTRIBUTOR} component={Contributor}></Route>
-                <Route path={URL.SKILL_MANAGEMENT} component={Skill}></Route>
-                <Route path={URL.SUB_SKILL} component={SubSkill}></Route>
-                <Route path={URL.QUESTIONS} component={Questions}></Route>
+                <Route exact path={URL.SKILL_MANAGEMENT} component={Skill}></Route>
+                {/* show all subskill inside this skill */}
+                <Route exact path={URL.SKILL_MANAGEMENT + "/:skill_id"} component={SubSkill}></Route>
+                {/* show all subskill inside this skill */}
+                <Route exact path={URL.SKILL_MANAGEMENT + "/:skill_id/:sub_skill_id"} component={Questions}></Route>
+
+                {/* <Route path={URL.SUB_SKILL} component={SubSkill}></Route> */}
+                {/* <Route path={URL.QUESTIONS} component={Questions}></Route> */}
                 <Route default component={NotFound}></Route>
             </Switch>
         </BrowserRouter>

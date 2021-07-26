@@ -10,16 +10,17 @@ import Response from "../../../utils/helpers/Response";
 import '../../../assets/css/modalColor.css';
 import InputRadio from "../../layouts/form/InputRadio";
 import InputTextArea from './../../layouts/form/InputTextArea';
+import { useParams } from 'react-router-dom';
 
-export default function SubSkillSetModal({ show, setShow,sub_item }) {
+export default function SubSkillSetModal({ show, setShow }) {
+  const { skill_id } = useParams()
   const { appDispatch, subSkill_listDispatch } = useContext(DispatchContext);
 
   const initSubSkill = {
-    skill_id:sub_item.id,
     title: "",
-    type:"",
-    task:"",
-    pass_mark:"",
+    type: "",
+    task: "",
+    pass_mark: "",
   };
   const [SubSkill, setSubSkill] = useState(initSubSkill);
 
@@ -28,17 +29,23 @@ export default function SubSkillSetModal({ show, setShow,sub_item }) {
     setShow(false);
     //validation
     const appAction = new AppAction(appDispatch);
-    if (!Helper.validateField(SubSkill.title,SubSkill.type,SubSkill.task,SubSkill.pass_mark)) {
+    if (!Helper.validateField(SubSkill.title, SubSkill.type, SubSkill.task, SubSkill.pass_mark)) {
       appAction.SET_RESPONSE(
         Response(false, "Enter all filed", "", Define.BT_DANGER, {})
       );
       return;
     }
+
+
+    let obj = { ...SubSkill }
+    obj.skill_id = skill_id
+
+
     //call api
     const listAction = new ListAction(subSkill_listDispatch);
-    const res = await listAction.addData("career/create/sub_skill", SubSkill);
+    const res = await listAction.addData("career/create/sub_skill", obj);
     appAction.SET_RESPONSE(res);
-    setSubSkill((pState)=>({...pState,skill_id:"",title:"",type:"",task:"",pass_mark:""}))
+    setSubSkill((pState) => ({ ...pState, skill_id: "", title: "", type: "", task: "", pass_mark: "" }))
   };
 
   const onChange = (e) => {
@@ -63,38 +70,38 @@ export default function SubSkillSetModal({ show, setShow,sub_item }) {
 
         <div className="row pb-2">
 
-            <div className="col-sm-4 col-md-4 col-xl-4 col-lg-4">
+          <div className="col-sm-4 col-md-4 col-xl-4 col-lg-4">
             <InputRadio
-            name="type"
-            title="Begineer"
-            type="radio"
-            value="begineer"
-            onChange={onChange}
-            checked = {SubSkill.type==='begineer'}
+              name="type"
+              title={Define.TYPE_SKILL_BEGINNER}
+              type="radio"
+              value={Define.TYPE_SKILL_BEGINNER}
+              onChange={onChange}
+              checked={SubSkill.type === Define.TYPE_SKILL_BEGINNER}
             />
-            </div>
+          </div>
 
-            <div className="col-sm-4 col-md-4 col-xl-4 col-lg-4">
+          <div className="col-sm-4 col-md-4 col-xl-4 col-lg-4">
             <InputRadio
-            name="type"
-            title="Intermediate"
-            type="radio"
-            value="intermediate"
-            onChange={onChange}
-            checked = {SubSkill.type==='intermediate'}
+              name="type"
+              title={Define.TYPE_SKILL_INTERMIDIATE}
+              type="radio"
+              value={Define.TYPE_SKILL_INTERMIDIATE}
+              onChange={onChange}
+              checked={SubSkill.type === Define.TYPE_SKILL_INTERMIDIATE}
             />
-            </div>
-            
-            <div className="col-sm-4 col-md-4 col-xl-4 col-lg-4">
+          </div>
+
+          <div className="col-sm-4 col-md-4 col-xl-4 col-lg-4">
             <InputRadio
-            name="type"
-            title="Advanced"
-            type="radio"
-            value="advanced"
-            onChange={onChange}
-            checked = {SubSkill.type==='advanced'}
+              name="type"
+              title={Define.TYPE_SKILL_ADVANCED}
+              type="radio"
+              value={Define.TYPE_SKILL_ADVANCED}
+              onChange={onChange}
+              checked={SubSkill.type === Define.TYPE_SKILL_ADVANCED}
             />
-            </div>
+          </div>
 
         </div>
 

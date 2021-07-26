@@ -6,7 +6,9 @@ import AlertLoading from '../../layouts/AlertLoading';
 import QuestionsModal from './QuestionsModal';
 import QuestionsTable from './QuestionsTable';
 
-export default function QuestionsSet({question_item}) {
+export default function QuestionsSet() {
+
+
     //local state
     const [show, setShow] = useState(false);
     const [page, setPage] = useState(1);
@@ -32,7 +34,7 @@ export default function QuestionsSet({question_item}) {
 
     return (
         <>
-            <QuestionsModal show={show} setShow={setShow} question_item={question_item} />
+            <QuestionsModal show={show} setShow={setShow} />
             <Row >
                 <Col className="d-flex justify-content-center mb-3">
                     <AlertLoading loadColor={Define.BT_DANGER} />
@@ -45,12 +47,12 @@ export default function QuestionsSet({question_item}) {
                     <Button className="mr-2 button_color" onClick={next}>Next</Button>
                 </Col>
                 <Col className="d-flex justify-content-end mb-3 ">
-                    <Button className="button_color"onClick={() => { setShow(true) }}>Add New Question</Button>
+                    <Button className="button_color" onClick={() => { setShow(true) }}>Add New Question</Button>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <QuestionsTable page={page} question_item={question_item} />
+                    <QuestionsTable page={page} />
                 </Col>
             </Row>
         </ >

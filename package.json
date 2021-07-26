@@ -1,6 +1,7 @@
 {
   "name": "dept-panel",
   "version": "0.1.0",
+  "homepage": "http://localhost:3002/",
   "private": true,
   "dependencies": {
     "axios": "^0.21.1",

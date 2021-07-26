@@ -9,10 +9,13 @@ import { DispatchContext, StateContext } from "./../../../utils/context/MainCont
 import Response from "./../../../utils/helpers/Response";
 import Helper from "../../../utils/helpers/Helper";
 import CUser from "../../../utils/helpers/CUser";
+import { useParams } from 'react-router-dom';
 
-export default function QuestionsTable({ page ,question_item}) {
+export default function QuestionsTable({ page }) {
   const [show, setShow] = useState({ view: false, edit: false, delete: false });
   const [viewItem, setViewItem] = useState(null);
+
+  const { sub_skill_id } = useParams()
 
   // Handle Edit
   const handleClickEdit = (event) => {
@@ -30,10 +33,10 @@ export default function QuestionsTable({ page ,question_item}) {
 
   const onSubmit = async () => {
     //hide the modal
-    setShow({view: false, edit: false, delete: false });
+    setShow({ view: false, edit: false, delete: false });
     //validation
     const appAction = new AppAction(appDispatch);
-    if (!Helper.validateField(viewItem.title, viewItem.op_1,viewItem.op_2,viewItem.op_3,viewItem.op_4,viewItem.ans)) {
+    if (!Helper.validateField(viewItem.title, viewItem.op_1, viewItem.op_2, viewItem.op_3, viewItem.op_4, viewItem.ans)) {
       appAction.SET_RESPONSE(
         Response(false, "Enter all filed", "", Define.BT_DANGER, {})
       );
@@ -58,8 +61,8 @@ export default function QuestionsTable({ page ,question_item}) {
       const load = async () => {
         try {
           if (uid) {
-            const res = await listAction.getAll(`career/get-all/question/sub_skill_id/${question_item.id}`)
-            console.log("list: ", res)
+            const res = await listAction.getAll(`career/get-all/question/sub_skill_id/${sub_skill_id}`)
+            console.log("sub skill question list: ", res)
           }
         } catch (e) {
           console.log(e);
@@ -98,7 +101,7 @@ export default function QuestionsTable({ page ,question_item}) {
           <Table striped bordered hover responsive>
             <thead>
               <tr>
-              <th>ID#</th>
+                <th>ID#</th>
                 <th>Question</th>
                 <th>Option 1</th>
                 <th>Option 2</th>
@@ -111,7 +114,7 @@ export default function QuestionsTable({ page ,question_item}) {
             <tbody>
               {question_list.map((Question_item) => {
                 return (
-                    <tr key={Question_item.id}>
+                  <tr key={Question_item.id}>
                     <td>{Question_item.id}</td>
                     <td>{Question_item.title}</td>
                     <td>{Question_item.op_1}</td>

@@ -6,6 +6,7 @@ import { DispatchContext } from "./../../../utils/context/MainContext";
 import ModalDelete from "../../layouts/modal/ModalDelete";
 import InputRadio from './../../layouts/form/InputRadio';
 import InputTextArea from './../../layouts/form/InputTextArea';
+import Define from './../../../utils/helpers/Define';
 
 export default function SubSkillDelete({ show, setShow, viewItem }) {
   const { appDispatch, subSkill_listDispatch } = useContext(DispatchContext);
@@ -45,38 +46,38 @@ export default function SubSkillDelete({ show, setShow, viewItem }) {
 
         <div className="row pb-2">
 
-            <div className="col-sm-4 col-md-4 col-xl-4 col-lg-4">
+          <div className="col-sm-4 col-md-4 col-xl-4 col-lg-4">
             <InputRadio
-            name="type"
-            title="Begineer"
-            type="radio"
-            value={viewItem.type}
-            onChange={onChange}
-            checked ={viewItem.type==="begineer"}
+              name="type"
+              title={Define.TYPE_SKILL_BEGINNER}
+              type="radio"
+              value={viewItem.type}
+              onChange={onChange}
+              checked={viewItem.type === Define.TYPE_SKILL_BEGINNER}
             />
-            </div>
+          </div>
 
-            <div className="col-sm-4 col-md-4 col-xl-4 col-lg-4">
+          <div className="col-sm-4 col-md-4 col-xl-4 col-lg-4">
             <InputRadio
-            name="type"
-            title="Intermediate"
-            type="radio"
-            value="intermediate"
-            onChange={viewItem.type}
-            checked ={viewItem.type==="intermediate"}
+              name="type"
+              title={Define.TYPE_SKILL_INTERMIDIATE}
+              type="radio"
+              value={Define.TYPE_SKILL_INTERMIDIATE}
+              onChange={viewItem.type}
+              checked={viewItem.type === Define.TYPE_SKILL_INTERMIDIATE}
             />
-            </div>
-            
-            <div className="col-sm-4 col-md-4 col-xl-4 col-lg-4">
+          </div>
+
+          <div className="col-sm-4 col-md-4 col-xl-4 col-lg-4">
             <InputRadio
-            name="type"
-            title="Advanced"
-            type="radio"
-            value="advanced"
-            onChange={viewItem.type}
-            checked ={viewItem.type==="advanced"}
+              name="type"
+              title={Define.TYPE_SKILL_ADVANCED}
+              type="radio"
+              value={Define.TYPE_SKILL_ADVANCED}
+              onChange={viewItem.type}
+              checked={viewItem.type === Define.TYPE_SKILL_ADVANCED}
             />
-            </div>
+          </div>
 
         </div>
 

@@ -32,14 +32,26 @@ class ListAction {
                             Response(true, "success", message, Define.BT_SUCCESS, response)
                         );
                     } else {
-                        reject(new Error(message));
+                        this.dispatch({
+                            type: Types.GET_DATA,
+                            payload: []//an array
+                        });
+                        resolve(Response(false, "failed", message, Define.BT_DANGER, []));
                     }
                 })
                 .catch((e) => {
                     if (axios.isCancel(e)) {
-                        reject(new Error("canceled the request"));
+                        this.dispatch({
+                            type: Types.GET_DATA,
+                            payload: []//an array
+                        });
+                        resolve(Response(false, "canceled the request", e.message, Define.BT_DANGER, []));
                     } else {
-                        reject(e);
+                        this.dispatch({
+                            type: Types.GET_DATA,
+                            payload: []//an array
+                        });
+                        resolve(Response(false, "failed", e.message, Define.BT_DANGER, []));
                     }
                 });
         });
@@ -63,11 +75,11 @@ class ListAction {
                         );
                     } else {
                         //error
-                        reject(new Error(message));
+                        resolve(Response(false, "failed", message, Define.BT_DANGER));
                     }
                 })
                 .catch((e) => {
-                    reject(e);
+                    resolve(Response(false, "failed", e.message, Define.BT_DANGER));
                 });
         });
     }; //end add data

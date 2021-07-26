@@ -10,6 +10,7 @@ import Response from "./../../../utils/helpers/Response";
 import Helper from "../../../utils/helpers/Helper";
 import CUser from "../../../utils/helpers/CUser";
 import { useHistory } from 'react-router-dom';
+import URL from './../../../utils/helpers/URL';
 
 export default function SkillTable({ page }) {
   const [show, setShow] = useState({ view: false, edit: false, delete: false });
@@ -28,8 +29,10 @@ export default function SkillTable({ page }) {
   };
 
   // Handle View 
-  const handleViewSubSkill = (item) => {
-    history.push('/subSkill', { sub_items: item })
+  const handleViewSubSkill = (item_id) => {
+    // console.log("one: ", item)
+    // history.push('/subSkill', { sub_items: item })
+    history.push(`${URL.SKILL_MANAGEMENT}/${item_id}`)
   };
 
   const { appDispatch, skill_listDispatch } = useContext(DispatchContext);
@@ -56,7 +59,6 @@ export default function SkillTable({ page }) {
 
   // Getting list
   useEffect(() => {
-
     const listAction = new ListAction(skill_listDispatch)
     const token = listAction.getSource()
     try {
@@ -65,7 +67,7 @@ export default function SkillTable({ page }) {
         try {
           if (uid) {
             const res = await listAction.getAll(`career/get-paginate/skill/${page}`)
-            console.log("list: ", res)
+            console.log("m-list: ", res)
           }
         } catch (e) {
           console.log(e);
@@ -120,7 +122,7 @@ export default function SkillTable({ page }) {
                     <td>
                       <button
                         className="btn text-info bg-transparent"
-                        onClick={() => handleViewSubSkill(item)}
+                        onClick={() => handleViewSubSkill(item.id)}
                       >
                         View
                       </button>

@@ -11,6 +11,10 @@ const Define = {
     //define
     NOT_SET: "NOT_SET",
     C_USER: "DEPT_C_USER",
-    PAGE_SIZE: 10
+    PAGE_SIZE: 10,
+    //type of skill
+    TYPE_SKILL_ADVANCED: "advanced",
+    TYPE_SKILL_INTERMIDIATE: "intermidiate",
+    TYPE_SKILL_BEGINNER: "beginner",
 }
 export default Define
