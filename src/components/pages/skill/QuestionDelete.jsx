@@ -94,6 +94,7 @@ export default function QuestionDelete({ show, setShow, viewItem }) {
         <InputSelectValue
           disable
           name="ans"
+          question={viewItem}
           title="option # 4"
           value={viewItem.ans}
           onChange={onChange}

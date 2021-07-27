@@ -20,7 +20,7 @@ export default function Sidebar() {
 
 
                 <li className="nav-item ">
-                    <NavLink exact activeClassName="active" className="nav-link " to="/">
+                    <NavLink exact activeClassName="active" className="nav-link " to={URL.HOME}>
                         <i className="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span>
                     </NavLink>
@@ -30,13 +30,6 @@ export default function Sidebar() {
                 <div className="sidebar-heading">
                     Options
                 </div>
-                <li className="nav-item ">
-                    <NavLink exact activeClassName="active" className="nav-link" to={URL.HOME}>
-                        <i className="fas fa-fw fa-award"></i>
-                        <span>Home</span>
-                    </NavLink>
-                </li>
-                <hr className="sidebar-divider d-none d-md-block" />
 
                 <li className="nav-item ">
                     <NavLink exact activeClassName="active" className="nav-link" to={URL.SKILL_MANAGEMENT}>
