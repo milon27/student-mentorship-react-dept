@@ -1,3 +1,5 @@
+import moment from 'moment'
+import Define from './Define';
 const Helper = {
     validateField: (...arr) => {
         const n_arr = arr.filter(itm => {
@@ -10,7 +12,13 @@ const Helper = {
         } else {
             return false;//invalid all field
         }
-    }//validateField
+    },//validateField
+
+    getCurrentDate: () => {
+        return moment().format(
+            Define.FORMAT_DATE
+        )
+    }
 }
 
 export default Helper

@@ -11,7 +11,7 @@ export default function SkillDash() {
                 <img src={careerImg} alt="" className="icon_width" />
             </div>
             <div className="media-body ml-4">
-                Create SKills and Sub Skills and Questions for those Sub skills.
+                Create SKills and<br /> Sub Skills and<br /> Questions for those <br />Sub skills.
                 <br />
                 <Link to={URL.SKILL_MANAGEMENT}>Start Now</Link>
             </div>

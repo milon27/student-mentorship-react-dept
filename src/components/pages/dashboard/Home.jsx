@@ -4,6 +4,7 @@ import ProtectedPage from './../../layouts/ProtectedPage';
 import { Row, Col } from 'react-bootstrap';
 import DashCard from './DashCard';
 import SkillDash from './SkillDash';
+import TicketDash from './TickerDash';
 
 
 export default function Home() {
@@ -17,7 +18,9 @@ export default function Home() {
                         </DashCard>
                     </Col>
                     <Col>
-                        <DashCard title="Coming Soon" />
+                        <DashCard title="Report Generate" >
+                            <TicketDash />
+                        </DashCard>
                     </Col>
                     <Col>
                         <DashCard title="Coming Soon" />

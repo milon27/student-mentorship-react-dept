@@ -2,6 +2,7 @@ const Define = {
     API_BASE_URL: "http://localhost:2727/", //
     //time format
     FORMAT_DATE: "DD-MM-YYYY, hh:mm A",
+    MYSQL_DATE: "YYYY-MM-DD",//2021-04-19
     //bootstrap color
     BT_PRIMARY: "primary",
     BT_DANGER: "danger",
