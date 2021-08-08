@@ -3,7 +3,7 @@ import Helper from './Helper';
 
 const getPDFobj = (title, string_arr) => {
     return {
-        watermark: { text: 'IUBAT', color: 'blue', opacity: 0.1, bold: true, italics: false },
+        watermark: { text: 'IUBAT', color: 'blue', opacity: 0.05, bold: true, italics: false },
         content: [
             {
                 image: logo,
@@ -21,7 +21,7 @@ const getPDFobj = (title, string_arr) => {
             },
             { text: '\n\n Report list', style: 'list' },
             {
-                ol: string_arr,
+                ul: string_arr,
                 style: 'list'
             },
 

@@ -18,7 +18,7 @@ export default function Home() {
                         </DashCard>
                     </Col>
                     <Col>
-                        <DashCard title="Report Generate" >
+                        <DashCard title="Current Month Ticket Summary" >
                             <TicketDash />
                         </DashCard>
                     </Col>

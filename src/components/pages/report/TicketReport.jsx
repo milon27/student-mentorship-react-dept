@@ -25,16 +25,47 @@ export default function TicketReport() {
             return
         }
         const uptoDate = moment(date).format(Define.MYSQL_DATE)
-        axios.get(`support/summary/dept/${uptoDate}`).then(res => {
+        axios.get(`support/ticket-summery-report/${uptoDate}`).then(res => {
             if (!res.data.error) {
-                console.log(res.data.response);
-                let str_arr = [
-                    `Total Pending:  ${res.data.response.total_pending}`,
-                    `Total Processing: ${res.data.response.total_processing}`,
-                    `Total Snoozed: ${res.data.response.total_snoozed}`,
-                    `Total Completed: ${res.data.response.total_completed}`,
-                ]
-                pdfMake.createPdf(getPDFobj("Ticket Status List from " + uptoDate + " to today", str_arr)).download();
+
+                const result = res.data.response
+                // [
+                //     'title',
+                //     {
+                //         ol: []
+                //     },
+
+                // ]
+                const arrray = []
+                //1
+                arrray.push(`Total Pending: ${result.total_pending.num}`)
+                arrray.push({
+                    ol: result.total_pending.tickets.map(item => item.ticket_title)
+                })
+
+                //2
+                arrray.push(`Total Processing: ${result.total_processing.num}`)
+                arrray.push({
+                    ol: result.total_processing.tickets.map(item => item.ticket_title)
+                })
+
+                //3
+                arrray.push(`Total Snoozed: ${result.total_snoozed.num}`)
+                arrray.push({
+                    ol: result.total_snoozed.tickets.map(item => item.ticket_title)
+                })
+                //4
+                arrray.push(`Total Completed: ${result.total_completed.num}`)
+                arrray.push({
+                    ol: result.total_completed.tickets.map(item => item.ticket_title)
+                })
+                //final
+                arrray.push(`Total Ticket: ${res.data.response.total_pending.num + res.data.response.total_processing.num + res.data.response.total_snoozed.num + res.data.response.total_completed.num}`)
+
+                pdfMake.createPdf(getPDFobj("Ticket Status List from " + uptoDate + " to today", arrray)).download();
+            } else {
+                console.log(res.data)
+                alert("No Data Found!Change Date.")
             }
         })
 
@@ -42,17 +73,43 @@ export default function TicketReport() {
 
 
     const genTicketAssignReport = () => {
-
-        axios.get(`support/ticket-assign-summery`).then(res => {
+        if (date === "") {
+            alert("select a date.")
+            return
+        }
+        const uptoDate = moment(date).format(Define.MYSQL_DATE)
+        axios.get(`support/ticket-assign-summery/${uptoDate}`).then(res => {
             if (!res.data.error) {
-                console.log(res.data.response);
-                const string_arr = res.data.response.map((item) => {
-                    if (item.name === "Pending") {
-                        return `Total Pending: ${item.total} `
+
+                // [
+                //     'title',
+                //     {
+                //         ol: []
+                //     },
+
+                // ]
+
+                const arrray = []
+
+                res.data.response.forEach((item) => {
+                    if (item.name !== "Pending") {
+                        let title = ` ${item.name}- Completed Ticket: ${item.total_completed}, processing Ticket: ${item.total_processing} `
+                        let tickets = item.tickets//[]
+                        const ticket_str_arr = tickets.map(item => {
+                            return item.ticket_title + " ( " + item.ticket_state + " )"
+                        })
+                        arrray.push(title)
+                        arrray.push({
+                            ol: ticket_str_arr
+                        })
                     }
-                    return ` ${item.name}- Completed Ticket: ${item.total_completed}, processing Ticket: ${item.total_processing} `
                 })
-                pdfMake.createPdf(getPDFobj("Ticket Assign AO Report", string_arr)).download();
+                pdfMake.createPdf(getPDFobj("Ticket Assign AO Report from " + uptoDate + " to today", arrray)).download();
+
+
+            } else {
+                alert("No Data Found!Change Date.")
+                console.log(res.data)
             }
         })
 
@@ -66,13 +123,18 @@ export default function TicketReport() {
                     <Col xs={12} md={6} className="border p-2">
                         <h3>Ticket Report</h3>
                         <label htmlFor="date">Select date upto which you want to generate report?</label>
-                        <input className="mt-3 form-control" type="date" name="date" id="date" onChange={(e) => setDate(e.target.value)} />
+                        <input className="mt-3 form-control" type="date" name="date" id="date" onChange={(e) => setDate(e.target.value)}
+                            max={moment().format(Define.MYSQL_DATE)}
+                        />
                         <Button className="mt-3 bg-primary" onClick={genTicketReport}>Generate Now</Button>
                     </Col>
                     {/* new column */}
                     <Col xs={12} md={6} className="border p-2">
                         <h3>Assign Report</h3>
-                        <p>Generate Report to see how many AO<br></br> ticket assignment details</p>
+                        <label>Generate Report to see how many AO ticket assignment details</label>
+                        <input className="mt-3 form-control" type="date" name="date" id="date" onChange={(e) => setDate(e.target.value)}
+                            max={moment().format(Define.MYSQL_DATE)}
+                        />
                         <Button className="mt-3 bg-primary" onClick={genTicketAssignReport}>Generate Now</Button>
                     </Col>
 
