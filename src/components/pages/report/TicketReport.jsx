@@ -19,12 +19,15 @@ export default function TicketReport() {
 
     const [date, setDate] = useState("")
 
+    //get all ticket upto today 
+
     const genTicketReport = () => {
         if (date === "") {
             alert("select a date.")
             return
         }
         const uptoDate = moment(date).format(Define.MYSQL_DATE)
+        setDate("")
         axios.get(`support/ticket-summery-report/${uptoDate}`).then(res => {
             if (!res.data.error) {
 
@@ -71,13 +74,14 @@ export default function TicketReport() {
 
     }
 
-
+    //AO report
     const genTicketAssignReport = () => {
         if (date === "") {
             alert("select a date.")
             return
         }
         const uptoDate = moment(date).format(Define.MYSQL_DATE)
+        setDate("")
         axios.get(`support/ticket-assign-summery/${uptoDate}`).then(res => {
             if (!res.data.error) {
 
@@ -102,6 +106,8 @@ export default function TicketReport() {
                         arrray.push({
                             ol: ticket_str_arr
                         })
+                    } else {
+                        arrray.push(` ${item.name}- Ticket: ${item.total}`)
                     }
                 })
                 pdfMake.createPdf(getPDFobj("Ticket Assign AO Report from " + uptoDate + " to today", arrray)).download();
