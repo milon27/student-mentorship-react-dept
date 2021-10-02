@@ -127,8 +127,9 @@ export default function TicketReport() {
                 {/* select a date */}
                 <Row className="ml-1">
                     <Col xs={12} md={6} className="border p-2">
-                        <h3>Ticket Report</h3>
-                        <label htmlFor="date">Select date upto which you want to generate report?</label>
+                        <h3>Ticket Status Report</h3>
+                        <small>Get Ticket Status List upto today from selected date</small><br />
+                        <label htmlFor="date">Select Date From?</label>
                         <input className="mt-3 form-control" type="date" name="date" id="date" onChange={(e) => setDate(e.target.value)}
                             max={moment().format(Define.MYSQL_DATE)}
                         />
@@ -137,6 +138,7 @@ export default function TicketReport() {
                     {/* new column */}
                     <Col xs={12} md={6} className="border p-2">
                         <h3>Assign Report</h3>
+                        <small>Get AO List with their ticket list upto today from selected date</small><br />
                         <label>Generate Report to see how many AO ticket assignment details</label>
                         <input className="mt-3 form-control" type="date" name="date" id="date" onChange={(e) => setDate(e.target.value)}
                             max={moment().format(Define.MYSQL_DATE)}

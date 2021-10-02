@@ -17,7 +17,12 @@ export default function ProtectedPage({ children }) {
                     CUser.logOut()
                     setAuthV(false)
                 } else {
-                    setAuthV(true)
+                    //ck localstorage
+                    if (CUser.getCurrentuser()) {
+                        setAuthV(true)
+                    } else {
+                        setAuthV(false)
+                    }
                 }
                 setLoading(false)
 

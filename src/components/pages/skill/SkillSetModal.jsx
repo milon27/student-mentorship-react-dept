@@ -14,7 +14,7 @@ export default function SkillSetModal({ show, setShow }) {
 
   const initSkill = {
     title: "",
-    intro_url: ""
+    intro_url: "https://www.youtube.com/embed/youtube_ID"
   };
   const [Skill, setSkill] = useState(initSkill);
 
@@ -33,7 +33,7 @@ export default function SkillSetModal({ show, setShow }) {
     const listAction = new ListAction(skill_listDispatch);
     const res = await listAction.addData("career/create/skill", Skill);
     appAction.SET_RESPONSE(res);
-    setSkill((pState)=>({...pState,title:"",intro_url:""}))
+    setSkill((pState) => ({ ...pState, title: "", intro_url: "" }))
   };
 
   const onChange = (e) => {
